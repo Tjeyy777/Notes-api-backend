@@ -80,6 +80,10 @@ Initialize the database schema using Alembic:
 ### 6. Start the Server
 ```uvicorn app.main:app --reload```
 
+### 7. 🧪 Testing
+```pytest```
+
+
 
 
 ## 📮 Postman Documentation (Mandatory)
@@ -108,6 +112,4 @@ In accordance with the requirements, access to the live Postman collection has b
 - `jmrpatel257@gmail.com`
 - `workemail.rajat@gmail.com`
 
-### 7. 🧪 Testing
-```pytest```
 
