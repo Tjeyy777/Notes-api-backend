@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import List, Optional
 
@@ -18,8 +18,8 @@ class Note(NoteBase):
     created_at: datetime
     updated_at: Optional[datetime]
 
-    class Config:
-        from_attributes = True
+    # Updated: Use model_config instead of class Config
+    model_config = ConfigDict(from_attributes=True)
 
 
 class NoteVersion(BaseModel):
@@ -31,5 +31,5 @@ class NoteVersion(BaseModel):
     
     editor_id: Optional[int] = None 
 
-    class Config:
-        from_attributes = True
+    # Updated: Use model_config instead of class Config
+    model_config = ConfigDict(from_attributes=True)

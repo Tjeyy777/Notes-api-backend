@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.post("/", response_model=note.Note)
 def create_note(note_in: note.NoteCreate, db: Session = Depends(deps.get_db), current_user: models.User = Depends(deps.get_current_user)):
-    new_note = models.Note(**note_in.dict(), owner_id=current_user.id)
+    new_note = models.Note(**note_in.model_dump(), owner_id=current_user.id)
     db.add(new_note)
     db.commit()
     db.refresh(new_note)
