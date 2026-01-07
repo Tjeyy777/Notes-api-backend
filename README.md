@@ -80,6 +80,34 @@ Initialize the database schema using Alembic:
 ### 6. Start the Server
 ```uvicorn app.main:app --reload```
 
+
+
+## 📮 Postman Documentation (Mandatory)
+
+This project includes a comprehensive Postman Collection to test and verify all API endpoints.
+
+### 🛠️ Setup & Import
+1. **File Location:** The collection file is located at `/docs/Notes_API.postman_collection.json`.
+2. **Import:** Open Postman, click **Import**, and select the file from this repository.
+3. **Environment:** The collection uses a `{{base_url}}` variable. By default, it is set to `http://127.0.0.1:8000`.
+
+### 🔐 Authentication Flow
+- The collection is configured with a **Collection-level Bearer Token**.
+- **Automatic Login:** When you run the `Admin Login` request, a post-response script automatically saves the `access_token` to the collection variables.
+- All protected routes (Notes, Search, Versioning) inherit this token automatically.
+
+### ✅ Features Included
+- **Saved Examples:** Every request includes an "Example" showing the expected input and output.
+- **Validation Scripts:** Every request includes automated tests to verify:
+  - Status codes (200 OK, 201 Created, 204 No Content).
+  - Data integrity (checking for arrays and object structures).
+- **Descriptive Bodies:** All POST and PUT requests come pre-loaded with sample JSON data.
+
+### 📧 Cloud Access
+In accordance with the requirements, access to the live Postman collection has been shared with:
+- `jmrpatel257@gmail.com`
+- `workemail.rajat@gmail.com`
+
 ### 7. 🧪 Testing
 ```pytest```
 
