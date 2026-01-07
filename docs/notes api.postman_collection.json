@@ -1,0 +1,640 @@
+{
+	"info": {
+		"_postman_id": "58d7a0b3-8414-435d-af72-1c453fb233ba",
+		"name": "notes api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46314708",
+		"_collection_link": "https://abhimanue-5326258.postman.co/workspace/dad1ed39-b494-474d-8fe1-6873c26592a5/collection/46314708-58d7a0b3-8414-435d-af72-1c453fb233ba?action=share&source=collection_link&creator=46314708"
+	},
+	"item": [
+		{
+			"name": "Notes api",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "{{base_url}}/auth/register",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/auth/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/auth/register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@example.com\",\r\n  \"password\": \"test123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:21:17 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "35"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"email\": \"test@example.com\",\n    \"id\": 2\n}"
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/auth/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Grab the token and save it to the collection variable\r",
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"token\", jsonData.access_token);\r",
+							"\r",
+							"// This is the 'Validation Script' the recruiter asked for\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "abhi123@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "abhi123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{base_url}}/auth/login",
+					"protocol": "http",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/auth/login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "test@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{base_url}}/auth/login",
+							"protocol": "http",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:21:57 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "180"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiZXhwIjoxNzY3ODAxMTE4fQ.hNdYwAucqq6MP-W-qkv18y36jma1frQds18XpAgLGGo\",\n    \"token_type\": \"bearer\"\n}"
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"note_id\", jsonData.id); // Saves ID for Get/Put/Delete\r",
+							"\r",
+							"pm.test(\"Note created successfully\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Postman Test Note\",\r\n  \"content\": \"This note was created automatically during testing.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/notes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/notes",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Postman Test Note\",\r\n  \"content\": \"This note was created automatically during testing.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/notes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:24:27 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "179"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Postman Test Note\",\n    \"content\": \"This note was created automatically during testing.\",\n    \"id\": 6,\n    \"owner_id\": 2,\n    \"created_at\": \"2026-01-07T20:54:27.750142+05:30\",\n    \"updated_at\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Returns array\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('array');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/notes",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notes"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/notes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/notes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:25:46 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "361"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Postman Test Note\",\n        \"content\": \"This note was created automatically during testing.\",\n        \"id\": 5,\n        \"owner_id\": 2,\n        \"created_at\": \"2026-01-07T20:53:46.075241+05:30\",\n        \"updated_at\": null\n    },\n    {\n        \"title\": \"Postman Test Note\",\n        \"content\": \"This note was created automatically during testing.\",\n        \"id\": 6,\n        \"owner_id\": 2,\n        \"created_at\": \"2026-01-07T20:54:27.750142+05:30\",\n        \"updated_at\": null\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/notes/{{note_id}}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Updated Title\",\r\n  \"content\": \"Updated content via Postman variable.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/notes/6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notes",
+						"6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/notes/{{note_id}}",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Title\",\r\n  \"content\": \"Updated content via Postman variable.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/notes/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								"6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:27:02 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "191"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Updated Title\",\n    \"content\": \"Updated content via Postman variable.\",\n    \"id\": 6,\n    \"owner_id\": 2,\n    \"created_at\": \"2026-01-07T20:54:27.750142+05:30\",\n    \"updated_at\": \"2026-01-07T20:57:03.238639+05:30\"\n}"
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/notes/{{note_id}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Deleted successfully\", function () {\r",
+							"    pm.response.to.have.status(204); // or 200 if your API returns data\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/notes/6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notes",
+						"6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/notes/{{note_id}}",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/notes/6",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								"6"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:28:31 GMT"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "{{base_url}}/notes/search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Search status is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Search returns a list\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an(\"array\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/notes/?q=Test",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notes",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Test"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "{{base_url}}/notes/search",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/notes/?q=Test",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"notes",
+								""
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Test"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 07 Jan 2026 15:33:20 GMT"
+						},
+						{
+							"key": "content-length",
+							"value": "181"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Postman Test Note\",\n        \"content\": \"This note was created automatically during testing.\",\n        \"id\": 5,\n        \"owner_id\": 2,\n        \"created_at\": \"2026-01-07T20:53:46.075241+05:30\",\n        \"updated_at\": null\n    }\n]"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "note_id",
+			"value": ""
+		}
+	]
+}
