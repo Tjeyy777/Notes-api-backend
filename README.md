@@ -2,10 +2,6 @@
 
 
 
-# Notes API with Version History
-
-# Notes API Backend
-
 A FastAPI-based backend for managing personal notes with JWT authentication.
 
 ## 🚀 Deployment & API Testing
