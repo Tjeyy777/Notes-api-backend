@@ -8,19 +8,13 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
-origins = [
-    "http://localhost",
-    "http://localhost:3000", # Common React/Next.js port
-    "http://127.0.0.1:8000",
-]
-
+# CORS Setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allows all origins for testing; change to 'origins' for production
+    allow_origins=["*"], 
     allow_credentials=True,
-    allow_methods=["*"], # Allows all HTTP methods (GET, POST, PUT, DELETE, etc.)
-    allow_headers=["*"], # Allows all headers (including Authorization)
+    allow_methods=["*"], 
+    allow_headers=["*"], 
 )
 
 # --- Routes ---
@@ -29,9 +23,6 @@ app.include_router(notes.router, prefix="/notes", tags=["Notes Management"])
 
 @app.get("/", tags=["Health"])
 def health_check():
-    """
-    Check if the API and Database connection are functional.
-    """
     return {
         "status": "online",
         "message": "Notes API is running securely"

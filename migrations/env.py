@@ -4,22 +4,24 @@ from sqlalchemy import engine_from_config, pool
 from alembic import context
 from dotenv import load_dotenv
 
-
+# Import your Base and models so Alembic can see the tables
 from app.db.base import Base
 from app.models.models import User, Note, NoteVersion 
 
-
 load_dotenv()
-
 
 config = context.config
 
+# --- PRODUCTION FIX FOR DATABASE URL ---
+db_url = os.getenv("DATABASE_URL")
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://", 1)
 
-config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
+config.set_main_option("sqlalchemy.url", db_url)
+# ---------------------------------------
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
-
 
 target_metadata = Base.metadata
 
@@ -36,7 +38,6 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 def run_migrations_online() -> None:
- 
     connectable = engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",
