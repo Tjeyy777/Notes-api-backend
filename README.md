@@ -4,8 +4,21 @@
 
 # Notes API with Version History
 
-**Live API URL:** [https://notes-api-backend-dchf.onrender.com](https://notes-api-backend-dchf.onrender.com)  
-**Interactive Docs:** [https://notes-api-backend-dchf.onrender.com/docs](https://notes-api-backend-dchf.onrender.com/docs)
+# Notes API Backend
+
+A FastAPI-based backend for managing personal notes with JWT authentication.
+
+## 🚀 Deployment & API Testing
+- **Live API URL:** `https://notes-api-backend-dchf.onrender.com`
+- **Postman Collection:** [Access Collection Here](https://abhimanue-5326258.postman.co/workspace/Abhimanue's-Workspace~dad1ed39-b494-474d-8fe1-6873c26592a5/collection/46314708-58d7a0b3-8414-435d-af72-1c453fb233ba?action=share&source=copy-link&creator=46314708)
+
+## 🛠️ How to Test
+1. **Import the Collection:** Use the link above to view/import the requests.
+2. **Environment Setup:** Ensure the `base_url` variable is set to `notes-api-backend-dchf.onrender.com`.
+3. **Authentication:** - Run the **Register** and **Login** requests first.
+   - The login request has a test script that automatically saves the `access_token` to your variables.
+4. **CRUD Flow:** - Once logged in, you can Create, Get, Update, and Delete notes. 
+   - All protected routes automatically use the Bearer token.
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-0.110-green) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue) ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
