@@ -13,6 +13,7 @@ A FastAPI-based backend for managing personal notes with JWT authentication.
 2. **Environment Setup:** Ensure the `base_url` variable is set to `notes-api-backend-dchf.onrender.com`.
 3. **Authentication:** - Run the **Register** and **Login** requests first.
    - The login request has a test script that automatically saves the `access_token` to your variables.
+   - if sometimes the token will not populate to other api request if that happens try to refresh or change the token manually
 4. **CRUD Flow:** - Once logged in, you can Create, Get, Update, and Delete notes. 
    - All protected routes automatically use the Bearer token.
 
